@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>День рішень — Python-квест</title>
+<style>
+:root{color-scheme:dark;--bg:#101728;--card:#1b253c;--muted:#b7c4dd;--accent:#b7f398}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0,#263455,transparent 55%),var(--bg);color:#f3f6fc;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}main{max-width:1080px;margin:auto;padding:36px 22px}header{display:grid;grid-template-columns:1.15fr 1fr;gap:30px;align-items:center;margin-bottom:30px}.tag{color:var(--accent);font-weight:700;letter-spacing:.13em;font-size:.8rem}h1{font-size:clamp(2.5rem,6vw,4.8rem);line-height:1.05;margin:14px 0 20px;letter-spacing:-.04em}h1 span{color:var(--accent)}.intro{color:var(--muted);max-width:520px;font-size:1.08rem}.art{width:100%;max-height:300px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:#ffffff09;border:1px solid #ffffff18;padding:5px 12px;border-radius:30px;font-size:.85rem}.game{border:1px solid #3a4963;border-radius:22px;overflow:hidden;background:var(--card);box-shadow:0 20px 60px #0003}.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;border-bottom:1px solid #3a4963}.bar h2{font-size:1rem;margin:0}.status{font-size:.85rem;color:var(--muted)}#output{height:370px;overflow:auto;padding:22px;font-family:ui-monospace,Consolas,monospace;font-size:1rem;white-space:pre-wrap;overflow-wrap:anywhere;background:#111b2d}.line{min-height:1.4em;margin-bottom:3px}.answer{color:var(--accent)}.error{color:#ffb2ac}.controls{padding:20px 22px}#prompt{display:block;font-weight:600;margin-bottom:10px}form{display:flex;gap:10px}input{min-width:0;flex:1;background:#111b2d;border:1px solid #5a6c89;border-radius:12px;padding:13px;color:white;font:inherit}input:focus{outline:2px solid var(--accent);outline-offset:2px}button{border:0;border-radius:12px;padding:12px 20px;background:var(--accent);color:#172324;font:inherit;font-weight:700;cursor:pointer}button:hover{filter:brightness(1.08)}button:disabled{opacity:.4;cursor:default}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.secondary{background:#33415b;color:white}.hint{color:var(--muted);font-size:.88rem;margin:12px 0 0}details{margin-top:24px;border:1px solid #3a4963;border-radius:16px;padding:18px 22px}summary{cursor:pointer;font-weight:600}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#d7e4ff;font-size:.9rem}footer{color:var(--muted);font-size:.85rem;text-align:center;margin-top:24px}@media(max-width:650px){header{grid-template-columns:1fr;gap:8px}.art{max-height:200px}main{padding:24px 14px}.bar{align-items:flex-start;flex-direction:column;gap:4px}form{flex-wrap:wrap}form button{width:100%}#output{height:340px;padding:16px}.controls{padding:16px}}
+</style>
+</head>
+<body><nav class="course-return" aria-label="Навігація курсу" style="display:flex;flex-wrap:wrap;gap:16px;padding:12px 20px;background:#ede8fc;color:#423286;margin:0"><a href="./conditions.html" style="color:#423286;font:600 14px system-ui;text-decoration:none">← До розділу</a><a href="./index.html" style="color:#423286;font:600 14px system-ui;text-decoration:none">🐍 Усі розділи</a></nav>
+<main>
+<header>
+<div><div class="tag">ІНТЕРАКТИВНИЙ PYTHON-КВЕСТ</div><h1>День<br><span>рішень.</span></h1><p class="intro">Дощ, загублений гаманець і підозріле повідомлення. Як діятимеш ти? Три ситуації — твоя власна історія.</p><div class="chips"><span>🌧️ Подбай про себе</span><span>👛 Допоможи іншим</span><span>🛡️ Захисти дані</span></div></div>
+<svg class="art" viewBox="0 0 420 300" role="img" aria-label="Ілюстрація: стежки вибору між дощем, допомогою та цифровою безпекою">
+<circle cx="212" cy="147" r="128" fill="#263754"/><circle cx="212" cy="147" r="95" fill="none" stroke="#486085" stroke-dasharray="4 12"/>
+<path d="M210 268V176M210 176L104 86M210 176L320 85" stroke="#b7f398" stroke-width="16" stroke-linecap="round" fill="none"/>
+<rect x="53" y="32" width="100" height="86" rx="24" fill="#78b8e5"/><path d="M72 75Q103 35 134 75Z" fill="#fff"/><path d="M103 74V94Q103 105 91 100" fill="none" stroke="#243958" stroke-width="5"/>
+<rect x="270" y="32" width="100" height="86" rx="24" fill="#b7f398"/><path d="M320 49L345 59V78Q344 95 320 105Q296 95 295 78V59Z" fill="#30484b"/><path d="M309 76L318 85L333 67" fill="none" stroke="#b7f398" stroke-width="5"/>
+<rect x="160" y="133" width="100" height="86" rx="24" fill="#facd80"/><rect x="180" y="155" width="60" height="40" rx="7" fill="#755238"/><rect x="216" y="165" width="29" height="19" rx="5" fill="#fff1ca"/><circle cx="225" cy="174" r="3" fill="#755238"/>
+<circle cx="210" cy="267" r="15" fill="#f5f7fc"/><circle cx="62" cy="185" r="5" fill="#facd80"/><circle cx="355" cy="185" r="7" fill="#78b8e5"/>
+</svg>
+</header>
+<section class="game" aria-label="Ігрове вікно">
+<div class="bar"><h2>🎮 Твоя історія</h2><span class="status" id="status" role="status">Натисни «Почати гру»</span></div>
+<div id="output" role="log" aria-live="polite" aria-relevant="additions"><div class="line">👋 Вітаємо! Тут з’являтимуться події та наслідки твоїх рішень.</div></div>
+<div class="controls"><form id="form"><label id="prompt" for="reply" style="position:absolute;left:-10000px">Твоя відповідь</label><input id="reply" autocomplete="off" placeholder="Твоя відповідь…" disabled aria-label="Твоя відповідь"><button id="send" disabled>Відповісти ↵</button></form><div class="buttons"><button id="start" type="button">▶ Почати гру</button><button id="restart" class="secondary" type="button" disabled>↻ Зіграти ще раз</button></div><p class="hint">Вводь відповідь і натискай Enter. На перше завантаження гри потрібен час та інтернет.</p></div>
+</section>
+<details><summary>🐍 Подивитися Python-код</summary><p class="hint">У грі є проста умова, повне й багатоваріантне розгалуження та вкладені умови.</p><pre><code id="code"></code></pre><button id="download" class="secondary" type="button">↓ Завантажити game.py</button></details>
+<footer>Кожен вибір — можливість навчитися 🌱</footer>
+</main>
+<script id="python-game" type="text/python">
+print("🌟 ДЕНЬ РІШЕНЬ 🌟")
+name = input("Як тебе звати? ")
+points = 0
+print("Привіт,", name, "👋")
+print("Попереду три життєві ситуації. Обирай свої дії!")
+
+print("\n🌧️ СИТУАЦІЯ 1. Час виходити до школи.")
+rain = input("Надворі дощ? (так/ні): ").strip().lower()
+while rain != "так" and rain != "ні":
+    rain = input("Введи так або ні: ").strip().lower()
+if rain == "так":
+    umbrella = input("Візьмеш парасольку? (так/ні): ").strip().lower()
+    while umbrella != "так" and umbrella != "ні":
+        umbrella = input("Введи так або ні: ").strip().lower()
+    if umbrella == "так":
+        print("☂️ Чудово! Ти дістанешся школи сухим.")
+        points = points + 1
+    else:
+        print("💦 Доведеться шукати укриття від дощу.")
+else:
+    print("☀️ Можна насолодитися прогулянкою!")
+    points = points + 1
+
+print("\n👛 СИТУАЦІЯ 2. Біля школи лежить чужий гаманець.")
+print("1 — Передати вчителю, щоб допоміг знайти власника.")
+print("2 — Пройти повз.")
+print("3 — Забрати собі.")
+choice = input("Твій вибір (1/2/3): ").strip()
+while choice != "1" and choice != "2" and choice != "3":
+    choice = input("Обери 1, 2 або 3: ").strip()
+if choice == "1":
+    print("🤝 Ти допоміг повернути загублену річ!")
+    points = points + 2
+elif choice == "2":
+    print("👀 Гаманець залишився лежати. Можна повідомити вчителя.")
+else:
+    print("🛑 Знайдена річ належить іншій людині.")
+
+print("\n📱 СИТУАЦІЯ 3. Тобі пише знайомий:")
+print("«Проголосуй за мене! Введи пароль від своєї пошти».")
+answer = input("Введеш пароль? (так/ні): ").strip().lower()
+while answer != "так" and answer != "ні":
+    answer = input("Введи так або ні: ").strip().lower()
+if answer == "так":
+    print("🚨 Стоп! Так можуть викрасти твій обліковий запис.")
+else:
+    print("🛡️ Твій пароль залишився в безпеці.")
+    points = points + 1
+check = input("Зателефонуєш знайомому, щоб перевірити повідомлення? (так/ні): ").strip().lower()
+while check != "так" and check != "ні":
+    check = input("Введи так або ні: ").strip().lower()
+if check == "так":
+    print("📞 Гарна ідея! Ти дізнаєшся, чи справді він це надіслав.")
+    points = points + 1
+
+print("\n🏁 ДЕНЬ ЗАВЕРШИВСЯ!")
+print(name, "твій результат:", points, "із 5 балів.")
+if points == 5:
+    print("🏆 Ти майстер продуманих рішень!")
+elif points >= 3:
+    print("🌟 Багато вдалих рішень! Спробуй інші варіанти.")
+else:
+    print("🌱 Кожен вибір — можливість навчитися. Зіграємо ще раз?")
+</script>
+<script>
+const source = document.getElementById('python-game').textContent.trim();
+document.getElementById('code').textContent = source;
+const output = document.getElementById('output');
+const statusText = document.getElementById('status');
+const reply = document.getElementById('reply');
+const send = document.getElementById('send');
+const start = document.getElementById('start');
+const restart = document.getElementById('restart');
+let runtime, running = false, pendingAnswer = null;
+function write(text, style = '') {
+    const line = document.createElement('div');
+    line.className = 'line ' + style;
+    line.textContent = String(text);
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+}
+window.questInput = function(question) {
+    write(question);
+    statusText.textContent = '✍️ Чекаємо на твою відповідь';
+    reply.disabled = false;
+    send.disabled = false;
+    reply.value = '';
+    reply.focus({preventScroll:true});
+    return new Promise(resolve => {pendingAnswer = resolve;});
+};
+document.getElementById('form').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!pendingAnswer) return;
+    const answer = reply.value.trim();
+    if (!answer) {reply.focus(); return;}
+    const resolve = pendingAnswer;
+    pendingAnswer = null;
+    write('› ' + answer, 'answer');
+    reply.disabled = true;
+    send.disabled = true;
+    reply.value = '';
+    statusText.textContent = '🎮 Історія продовжується';
+    resolve(answer);
+});
+async function loadRuntime() {
+    if (runtime) return runtime;
+    if (!window.loadPyodide) {
+        await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js';
+            script.onload = resolve;
+            script.onerror = () => {script.remove(); reject(new Error('Не вдалося завантажити Python. Перевір інтернет і спробуй ще раз.'));};
+            document.head.appendChild(script);
+        });
+    }
+    runtime = await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/'});
+    runtime.setStdout({batched: text => write(text)});
+    runtime.setStderr({batched: text => write(text, 'error')});
+    return runtime;
+}
+async function play() {
+    if (running) return;
+    running = true;
+    start.disabled = true;
+    restart.disabled = true;
+    output.replaceChildren();
+    statusText.textContent = '⏳ Готуємо гру…';
+    write('⏳ Завантажуємо Python. Перший запуск може тривати довше.');
+    try {
+        const py = await loadRuntime();
+        output.replaceChildren();
+        py.globals.set('_quest_source', source);
+        await py.runPythonAsync(`
+import ast
+from js import questInput
+
+async def _browser_input(prompt=""):
+    return str(await questInput(str(prompt)))
+
+class _BrowserInputAdapter(ast.NodeTransformer):
+    def visit_Call(self, node):
+        self.generic_visit(node)
+        if isinstance(node.func, ast.Name) and node.func.id == "input":
+            node.func.id = "_browser_input"
+            return ast.copy_location(ast.Await(value=node), node)
+        return node
+
+_tree = _BrowserInputAdapter().visit(ast.parse(_quest_source))
+ast.fix_missing_locations(_tree)
+_compiled = compile(_tree, "game.py", "exec", flags=ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
+await eval(_compiled, globals())
+`);
+        statusText.textContent = '🏁 Гру завершено';
+    } catch (error) {
+        write('⚠️ ' + error.message, 'error');
+        statusText.textContent = 'Спробуй запустити гру ще раз';
+    } finally {
+        running = false;
+        reply.disabled = true;
+        send.disabled = true;
+        restart.disabled = false;
+        start.disabled = false;
+        start.textContent = '▶ Почати гру';
+    }
+}
+start.addEventListener('click', play);
+restart.addEventListener('click', play);
+document.getElementById('download').addEventListener('click', () => {
+    const url = URL.createObjectURL(new Blob([source + '\n'], {type:'text/plain;charset=utf-8'}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'game.py';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+</script>
+</body>
+</html>

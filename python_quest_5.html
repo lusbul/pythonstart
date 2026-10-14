@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>РобоКвест — 5 кроків у Python</title>
+<style>
+:root{--ink:#243350;--muted:#56647c;--purple:#6650d9;--bg:#f4f2ff;--green:#23704a}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 5%,#e3dcff,transparent 40%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);line-height:1.6}main{max-width:960px;margin:auto;padding:30px 20px}.hero{display:flex;align-items:center;gap:26px;margin-bottom:24px}.hero svg{width:130px;flex-shrink:0}.eyebrow{color:var(--purple);font-size:.8rem;letter-spacing:.12em;font-weight:800}h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.2;margin:8px 0}p{margin:10px 0}.sub{color:var(--muted)}.map{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:20px 0}.stop{background:#e8e4f4;border:2px solid transparent;border-radius:14px;padding:10px 7px;text-align:center;font-size:.85rem;opacity:.7}.stop.current{background:white;border-color:var(--purple);opacity:1}.stop.done{background:#e1f3e9;color:var(--green);opacity:1}.stop b{display:block;font-size:1.15rem}.progress{height:8px;border-radius:10px;background:#ddd6f4;overflow:hidden}.progress div{height:100%;background:var(--purple);transition:width .3s}.card{margin-top:20px;background:white;border:1px solid #dfd9f2;border-radius:24px;padding:30px;box-shadow:0 16px 48px #3b276b0a}.label{color:var(--purple);font-weight:800;font-size:.85rem}h2{margin:6px 0 12px;font-size:1.65rem;line-height:1.3}.brief{background:#f1eefb;border-radius:14px;padding:14px 18px}.options{display:grid;gap:10px;margin:18px 0}button{font:inherit;font-weight:700;cursor:pointer;border:0;border-radius:12px;padding:12px 18px;background:var(--purple);color:white}button:disabled{opacity:.45;cursor:default}.option{background:white;border:2px solid #e3def1;color:var(--ink);text-align:left;font-weight:500;overflow-wrap:anywhere}.option:hover:not(:disabled){border-color:#b1a2ed;background:#faf8ff}.option.selected{border-color:var(--purple);background:#f0ecff}.option.correct{border-color:#69ad87;background:#edf9f1}.option.wrong{border-color:#df9797;background:#fff4f4}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.secondary{background:#ede8fc;color:var(--purple)}.feedback{margin-top:18px;padding:12px 16px;border-radius:12px;background:#f0edf9;white-space:pre-wrap}.feedback:empty{display:none}.feedback.good{background:#e8f7ee;color:#205e3d}.feedback.bad{background:#fff0ec;color:#903c29}.hint{background:#fff8dc;color:#695421;border-radius:12px;padding:12px 16px;margin-top:14px}.hint[hidden]{display:none}code,pre{font-family:ui-monospace,Consolas,monospace}code{font-size:1rem}pre{background:#202b41;color:#f0f6ff;padding:18px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:1rem;margin:16px 0}.console{background:#edf7f3;color:#234c3c}.field{display:block;margin:14px 0}input,select{font:inherit;padding:10px 12px;border:2px solid #d7d0e8;border-radius:10px;background:white;color:var(--ink);max-width:100%}input:focus,select:focus{outline:2px solid var(--purple);outline-offset:2px}.field input{display:block;width:min(100%,350px);margin-top:6px}.names{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}.namecard{border:1px solid #e1daef;border-radius:14px;padding:14px}.namecard code{font-weight:700;font-size:1.15rem}.namecard .pair{display:flex;gap:8px;margin-top:10px}.pair button{padding:7px 12px;font-size:.9rem;background:#eeeaf9;color:var(--ink)}.pair button.picked{background:var(--purple);color:white}.namecard.done{background:#eff8f2;border-color:#8ab79d}.verdict{font-size:.87rem;min-height:1.4em;color:var(--green);margin-top:8px}.mathrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eeeaf7}.mathrow input{width:100px}.rowmark{font-size:.8rem;color:#8d402d}.legend{font-size:.9rem;color:var(--muted)}.badge{font-size:4rem;text-align:center}.finish{text-align:center}.finish ul{display:inline-block;text-align:left}.finish .actions{justify-content:center}.footer{color:var(--muted);font-size:.85rem;text-align:center;margin:20px 0}button:focus-visible{outline:3px solid #f6ba44;outline-offset:3px}@media(max-width:600px){main{padding:20px 12px}.hero{gap:12px}.hero svg{width:75px}.card{padding:20px 16px}.map{gap:4px}.stop{font-size:.65rem;padding:8px 2px}.names{grid-template-columns:1fr}.mathrow{flex-wrap:wrap}.actions button{flex:1}h2{font-size:1.4rem}}
+</style>
+</head>
+<body><nav class="course-return" aria-label="Навігація курсу" style="display:flex;flex-wrap:wrap;gap:16px;padding:12px 20px;background:#ede8fc;color:#423286;margin:0"><a href="./basics.html" style="color:#423286;font:600 14px system-ui;text-decoration:none">← До розділу</a><a href="./index.html" style="color:#423286;font:600 14px system-ui;text-decoration:none">🐍 Усі розділи</a></nav><main>
+<header class="hero">
+<svg viewBox="0 0 150 160" role="img" aria-label="Дружній робот із п’ятьма зірками"><circle cx="75" cy="80" r="70" fill="#e6ddff"/><path d="M75 19V36" stroke="#6650d9" stroke-width="6"/><circle cx="75" cy="16" r="7" fill="#facd6b"/><rect x="31" y="35" width="88" height="69" rx="21" fill="#6650d9"/><rect x="40" y="44" width="70" height="47" rx="14" fill="#fff"/><circle cx="56" cy="64" r="7" fill="#243350"/><circle cx="94" cy="64" r="7" fill="#243350"/><path d="M63 78Q75 89 87 78" stroke="#6650d9" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="47" y="111" width="56" height="35" rx="12" fill="#b5a5ed"/><path d="M30 114L17 126M119 112L135 98" stroke="#6650d9" stroke-width="10" stroke-linecap="round"/><circle cx="75" cy="126" r="7" fill="#facd6b"/></svg>
+<div><div class="eyebrow">ЧЕТВЕРТЕ ЗАНЯТТЯ · PYTHON</div><h1>РобоКвест 🤖</h1><p class="sub">Допоможи Боту вирушити у подорож. П’ять кроків — п’ять нових умінь!</p></div>
+</header>
+<nav class="map" aria-label="Кроки квесту"><div class="stop"><b>📣 1</b>print</div><div class="stop"><b>💬 2</b>input</div><div class="stop"><b>🏷️ 3</b>Змінні</div><div class="stop"><b>🔢 4</b>int / float</div><div class="stop"><b>⚡ 5</b>Арифметика</div></nav>
+<div class="progress" role="progressbar" aria-label="Виконані кроки" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><div id="fill" style="width:0%"></div></div>
+<section id="mission" class="card" aria-label="Поточне завдання"></section>
+<p class="footer">Підказки дозволені. Помилки — частина навчання 🌱</p>
+</main>
+<script>
+'use strict';
+let step = 0, completed = 0, chosen = null, player = 'Дослідник', unlocked = false;
+const mount = document.getElementById('mission');
+const titles = ['📣 Увімкни голос Бота','💬 Познайомся з Ботом','🏷️ Майстерня назв','🔢 Перетвори текст на числа','⚡ Заряди батарею'];
+const hints = [
+'Текст у print() потрібно взяти в лапки, а команду — написати з круглими дужками.',
+'input() ставить запитання та повертає введений текст. Знак = зберігає його у змінній name.',
+'У цих прикладах назва може містити латинські літери, цифри та _. Цифра не може бути першою. Пробіли й дефіси не підходять. Службове слово if не можна використати як назву.',
+'int() перетворює текст із цілим числом, наприклад "7", на ціле число. float() — текст на кшталт "2.5" на число з дробовою частиною. У Python десятковий роздільник — крапка.',
+'Спочатку виконується множення, потім додавання. / — звичайне ділення, // — ділення націло, % — остача від ділення.'
+];
+const names = [
+['score',true,'Звичайна назва з літер.'],['2coins',false,'Назва не може починатися з цифри.'],
+['player_name',true,'Підкреслення дозволене.'],['my-name',false,'Дефіс не можна використовувати в назві.'],
+['level2',true,'Цифра після літер дозволена.'],['if',false,'if — службове слово Python.']
+];
+const votes = Array(names.length).fill(null);
+const math = [
+['4 + 3',7,'Бот знайшов 4 батарейки, а потім ще 3. Скільки всього?'],
+['10 - 2 * 3',4,'Є 10 одиниць енергії. Два стрибки витратили по 3. Скільки залишилося?'],
+['12 / 4',3,'Розділи 12 одиниць енергії порівну між 4 роботами.'],
+['13 // 4',3,'З 13 батарейок збираємо набори по 4. Скільки повних наборів?'],
+['13 % 4',1,'Скільки батарейок залишиться після збирання цих наборів?']
+];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function feedback(text,good){const el=document.getElementById('feedback');el.textContent=text;el.className='feedback '+(good?'good':'bad');}
+function succeed(text){unlocked=true;feedback(text,true);document.getElementById('next').disabled=false;if(completed<step+1)completed=step+1;updateMap();}
+function updateMap(){document.querySelectorAll('.stop').forEach((el,i)=>{el.className='stop'+(i<completed?' done':'')+(i===step&&step<5?' current':'');});document.getElementById('fill').style.width=(completed*20)+'%';document.querySelector('.progress').setAttribute('aria-valuenow',completed);}
+function choices(items){return '<div class="options">'+items.map((item,i)=>'<button type="button" class="option" data-choice="'+i+'" aria-pressed="false"><code>'+esc(item)+'</code></button>').join('')+'</div>';}
+function render(){
+ chosen=null;unlocked=false;updateMap();
+ if(step===5){finish();return;}
+ let body='';
+ if(step===0)body='<p class="brief">Бот хоче привітатися: <b>Привіт! Я готовий до пригод!</b><br>Обери команду, яка тільки покаже це повідомлення й не запитуватиме відповіді.</p>'+choices(['print("Привіт! Я готовий до пригод!")','print(Привіт! Я готовий до пригод!)','input("Привіт! Я готовий до пригод!")'])+'<pre id="preview">Тут з’явиться повідомлення Бота.</pre>';
+ if(step===1)body='<p class="brief">Бот хоче запитати твоє ім’я та зберегти відповідь у змінній <code>name</code>. Обери правильний рядок.</p>'+choices(['name = print("Як тебе звати? ")','name = input("Як тебе звати? ")','print("name")'])+'<label class="field">Як тебе звати? Можна ввести псевдонім.<input id="name" maxlength="30" placeholder="Наприклад, Космокіт" autocomplete="off"></label><p class="legend">У Python результат input() — текст, тобто тип str.</p><pre id="preview">Тут Бот покаже, що запам’ятав.</pre>';
+ if(step===2)body='<p class="brief">Бот переплутав наліпки на коробках зі змінними. Для кожної назви обери: <b>правильно</b> чи <b>неправильно</b> за правилами Python.</p><div class="names">'+names.map((n,i)=>'<div class="namecard" id="namecard'+i+'"><code>'+esc(n[0])+'</code><div class="pair"><button data-name="'+i+'" data-value="true" type="button" aria-pressed="false">✅ Правильно</button><button data-name="'+i+'" data-value="false" type="button" aria-pressed="false">❌ Неправильно</button></div><div class="verdict" id="verdict'+i+'" role="status"></div></div>').join('')+'</div><p class="legend">«Неправильно» означає: таку назву не можна використати для змінної.</p>';
+ if(step===3)body='<p class="brief">Бот читає числа з клавіатури, але <code>input()</code> повертає текст. Обери перетворення для двох ситуацій.</p><label class="field">1. Кількість батарейок зберігаємо саме як ціле число (int), наприклад 7.<br><code>coins = </code><select id="whole" aria-label="Перетворення кількості батарейок"><option value="">Обери…</option><option>int</option><option>float</option><option>str</option></select><code>(input("Кількість: "))</code></label><label class="field">2. Вага батарейки може бути 2.5 грама.<br><code>weight = </code><select id="decimal" aria-label="Перетворення ваги"><option value="">Обери…</option><option>int</option><option>float</option><option>str</option></select><code>(input("Вага: "))</code></label><pre id="preview">Після перевірки побачиш значення та типи.</pre>';
+ if(step===4)body='<p class="brief">Останнє випробування — арифметика. Запиши, що виведе кожна команда. Можна відповідати цілим числом або з крапкою: <b>3</b> чи <b>3.0</b>.</p>'+math.map((m,i)=>'<div class="mathrow"><div><div class="legend">'+esc(m[2])+'</div><code>print('+m[0]+')</code></div><div><input id="math'+i+'" inputmode="decimal" autocomplete="off" aria-label="Результат '+esc(m[0])+'"><div class="rowmark" id="mark'+i+'"></div></div></div>').join('');
+ mount.innerHTML='<div class="label">КРОК '+(step+1)+' ІЗ 5</div><h2>'+titles[step]+'</h2>'+body+'<div id="feedback" class="feedback" role="status" aria-live="polite"></div><div id="hint" class="hint" hidden>'+esc(hints[step])+'</div><div class="actions"><button id="check" type="button">Перевірити</button><button id="help" type="button" class="secondary" aria-expanded="false">💡 Підказка</button><button id="next" type="button" disabled>'+(step===4?'🏁 Завершити квест':'Далі →')+'</button></div>';
+ document.getElementById('check').onclick=check;
+ document.getElementById('help').onclick=function(){const hint=document.getElementById('hint');hint.hidden=!hint.hidden;this.setAttribute('aria-expanded',!hint.hidden);};
+ document.getElementById('next').onclick=()=>{if(!unlocked)return;step++;render();mount.scrollIntoView({behavior:'smooth',block:'start'});};
+ mount.querySelectorAll('[data-choice]').forEach(button=>button.onclick=()=>{if(unlocked)return;chosen=Number(button.dataset.choice);mount.querySelectorAll('[data-choice]').forEach(b=>{b.className='option'+(b===button?' selected':'');b.setAttribute('aria-pressed',b===button);});});
+ mount.querySelectorAll('[data-name]').forEach(button=>button.onclick=()=>vote(Number(button.dataset.name),button.dataset.value==='true'));
+}
+function vote(i,value){
+ if(votes[i]===names[i][1])return;
+ votes[i]=value;
+ const box=document.getElementById('namecard'+i);
+ box.querySelectorAll('button').forEach(b=>{const picked=(b.dataset.value==='true')===value;b.classList.toggle('picked',picked);b.setAttribute('aria-pressed',picked);});
+ const good=value===names[i][1];
+ const verdict=document.getElementById('verdict'+i);
+ verdict.textContent=good?'✓ '+names[i][2]:'Спробуй ще раз. '+names[i][2];
+ verdict.style.color=good?'#23704a':'#903c29';
+ if(good){box.classList.add('done');box.querySelectorAll('button').forEach(b=>b.disabled=true);}
+ if(votes.every((v,j)=>v===names[j][1]))succeed('🏷️ Усі шість назв перевірено! Бот знає, як називати змінні.');
+}
+function check(){
+ if(unlocked)return;
+ if(step===0||step===1){
+   if(chosen===null){feedback('Спочатку обери один рядок коду.',false);return;}
+   const right=step===0?0:1;
+   if(chosen!==right){feedback(step===0?'Поки що ні. Потрібна команда виведення з текстом у лапках.':'Цей рядок не запитує ім’я та не зберігає відповідь. Спробуй інший.',false);return;}
+   if(step===0){document.getElementById('preview').textContent='Привіт! Я готовий до пригод!';succeed('📣 Голос увімкнено! print() виводить повідомлення.');}
+   else{const name=document.getElementById('name').value.trim();if(!name){feedback('Введи ім’я або псевдонім, щоб Бот мав що запам’ятати.',false);return;}player=name;document.getElementById('preview').textContent='name = '+JSON.stringify(name)+'\nТип значення: str';succeed('💬 Приємно познайомитися, '+name+'! input() отримує відповідь, а = зберігає її.');}
+ }
+ if(step===2){const count=votes.filter((v,i)=>v===names[i][1]).length;if(count===6)succeed('🏷️ Усі назви перевірено!');else feedback('Правильно перевірено '+count+' із 6 назв. Дай відповіді на решту карток.',false);}
+ if(step===3){const whole=document.getElementById('whole').value;const decimal=document.getElementById('decimal').value;if(!whole||!decimal){feedback('Обери перетворення в обох рядках.',false);return;}if(whole==='int'&&decimal==='float'){document.getElementById('preview').textContent='coins = 7       → тип int\nweight = 2.5    → тип float';succeed('🔢 Готово! int — ціле число, float — число з дробовою частиною.');}else feedback('Для першого рядка потрібен тип цілого числа, для другого — тип, що зберігає дробову частину.',false);}
+ if(step===4){let count=0;math.forEach((item,i)=>{const field=document.getElementById('math'+i);const raw=field.value.trim().replace(',','.');const valid=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw);const good=valid&&Number(raw)===item[1];document.getElementById('mark'+i).textContent=good?'✅ Правильно':raw?'Спробуй ще раз':'Введи число';field.style.borderColor=good?'#69ad87':'#df9797';if(good)count++;});if(count===math.length)succeed('⚡ Батарея заряджена! Усі п’ять обчислень правильні.');else feedback('Правильно '+count+' із 5. Перевір інші результати. Підказка нагадає знаки дій.',false);}
+}
+function finish(){
+ mount.innerHTML='<div class="finish"><div class="badge">🏆</div><div class="label">5 ІЗ 5 КРОКІВ ВИКОНАНО</div><h2>'+esc(player)+', квест пройдено!</h2><p>Бот готовий до подорожі, а ти — до нових програм.</p><ul><li>Виводиш повідомлення через print().</li><li>Отримуєш текст через input().</li><li>Розпізнаєш правильні назви змінних.</li><li>Використовуєш int() і float().</li><li>Обчислюєш арифметичні вирази.</li></ul><p class="brief">🚀 Спробуй у Python: запитай кількість батарейок, перетвори відповідь через int() і виведи, скільки їх стане, якщо додати ще 2.</p><div class="actions"><button id="save" type="button">↓ Зберегти результат</button><button id="reset" class="secondary" type="button">↻ Пройти знову</button></div><p class="legend">Результат можна завантажити й надіслати вчителю. Сторінка сама його нікуди не надсилає.</p></div>';
+ document.getElementById('save').onclick=()=>{const text='РобоКвест — 5 кроків у Python\nУчасник: '+player+'\nРезультат: 5 із 5 кроків виконано\nДата: '+new Date().toLocaleDateString('uk-UA')+'\n\nprint, input, назви змінних, int / float, арифметика.\n';const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='robokvest-result.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+ document.getElementById('reset').onclick=()=>{step=completed=0;player='Дослідник';votes.fill(null);render();window.scrollTo({top:0,behavior:'smooth'});};
+}
+render();
+</script>
+</body>
+</html>
