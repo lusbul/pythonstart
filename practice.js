@@ -1,0 +1,33 @@
+'use strict';
+(() => {
+const P=PythonProgress,E=P.esc,id=new URLSearchParams(location.search).get('topic'),t=PYTHON_TOPICS.find(x=>x.id===id),mount=document.getElementById('practice-root');
+if(!t){mount.innerHTML='<h1>Оберіть тему</h1><p>Поверніться до <a href="index.html">розділів курсу</a>.</p>';return;}
+const state=P.topic(id);let chosen=state.draft.order||[];
+document.title=t.title+' — практика Python';
+mount.innerHTML=`<header class="section-hero" style="--tint:#e5ddfb"><div><div class="tag">ПРАКТИКА · 3 КРОКИ</div><h1>${E(t.title)}</h1><p>${E(t.concept)}</p></div></header><p><a href="${t.section}.html">← До розділу</a></p><label for="student">Ім’я для звіту (необов’язково)</label> <input id="student" maxlength="100" autocomplete="name"><p id="progress-label"></p><progress id="progress" max="3" value="0" aria-label="Виконані завдання"></progress>
+<section class="work"><h2>1. Передбачте результат</h2><p>${E(t.story)}</p><pre><code>${E(t.code)}</code></pre><label for="prediction">Ваша відповідь (без лапок)</label><input id="prediction" autocomplete="off"><div class="actions"><button class="button" id="check-prediction">Перевірити</button></div><p class="feedback" id="feedback-0" role="status"></p></section>
+<section class="work"><h2>2. Оберіть рішення</h2><p>${E(t.prompt)}</p><label for="solution">Варіант відповіді</label><select id="solution"><option value="">Оберіть…</option>${t.options.map((x,i)=>`<option value="${i}">${E(x)}</option>`).join('')}</select><div class="actions"><button class="button" id="check-solution">Перевірити</button></div><p class="feedback" id="feedback-1" role="status"></p><details><summary>Підказка</summary><p>${E(t.hint)}</p></details></section>
+<section class="work"><h2>3. Зберіть програму</h2><p>Завдання: ${E(t.goal)}. Дотримуйтеся саме цієї послідовності дій. Розташуйте всі рядки у логічному порядку. Натисніть рядок у програмі, щоб повернути його до набору. Відступи в рядках уже задано.</p>${t.section==='libraries'&&id!=='libraries-1'?'<p>Це конструктор коду. Графічну програму завантажте й запустіть на комп’ютері; тут вона не виконується.</p>':''}<div id="palette"></div><h3>Ваша програма</h3><div id="assembled"></div><div class="actions"><button class="button" id="check-order">Перевірити програму</button><button class="button" id="download">Завантажити .py</button></div><p class="feedback" id="feedback-2" role="status"></p></section>
+<aside class="notice"><b id="finish-message">Звіт оновлюється після кожної перевірки.</b><p>У звіті видно відповіді та всі спроби. Для PDF оберіть «Зберегти як PDF» у вікні друку.</p><a class="button" href="report.html?topic=${id}">Звіт цієї практики · PDF →</a></aside><nav class="section-nav" id="next-nav"></nav><p><button id="reset-topic" type="button">Почати цю практику заново</button></p>`;
+const $=s=>document.getElementById(s);
+$('student').value=P.data.name;$('student').oninput=()=>{P.data.name=$('student').value;P.save();};
+$('prediction').value=state.draft.prediction||'';$('solution').value=state.draft.solution??'';
+function draft(){state.draft={prediction:$('prediction').value,solution:$('solution').value,order:chosen};P.save();}
+$('prediction').oninput=draft;$('solution').onchange=draft;
+function status(i,ok,message){const el=$('feedback-'+i);el.textContent=message;el.className='feedback '+(ok?'success':'failure');}
+function refresh(){const n=state.tasks.filter(x=>x.done).length;$('progress').value=n;$('progress-label').textContent=`Виконано ${n} із 3 завдань`;
+state.tasks.forEach((x,i)=>{if(x.done)status(i,true,`✓ Виконано. Спроб: ${x.attempts}.`);});
+$('prediction').disabled=state.tasks[0].done;$('check-prediction').disabled=state.tasks[0].done;$('solution').disabled=state.tasks[1].done;$('check-solution').disabled=state.tasks[1].done;$('check-order').disabled=state.tasks[2].done;
+if(n===3)$('finish-message').textContent='🎉 Практику завершено! Збережіть свій звіт.';
+}
+function assess(i,response,ok,message){P.check(id,i,response,ok);status(i,ok,ok?'✓ Правильно!':message);refresh();}
+$('check-prediction').onclick=()=>{const value=$('prediction').value.trim();if(!value){status(0,false,'Спочатку введіть відповідь.');return;}draft();assess(0,value,value===t.answer,'Поки не збігається. Простежте зміну значень і точний текст повідомлення.');};
+$('check-solution').onclick=()=>{const value=$('solution').value;if(value===''){status(1,false,'Спочатку оберіть варіант.');return;}draft();assess(1,t.options[Number(value)],Number(value)===t.correct,t.hint);};
+function renderOrder(){const indices=t.program.map((_,i)=>i).sort((a,b)=>((a*7+3)%t.program.length)-((b*7+3)%t.program.length));if(indices.every((v,i)=>v===i))indices.reverse();$('palette').replaceChildren();$('assembled').replaceChildren();indices.filter(i=>!chosen.includes(i)).forEach(i=>line($('palette'),i,false));chosen.forEach(i=>line($('assembled'),i,true));if(!chosen.length)$('assembled').textContent='Тут з’являться обрані рядки.';}
+function line(parent,i,remove){const b=document.createElement('button');b.type='button';b.className='choice-line';const c=document.createElement('code');c.textContent=t.program[i];b.append(c);b.disabled=state.tasks[2].done;b.setAttribute('aria-label',(remove?'Повернути рядок: ':'Додати рядок: ')+t.program[i]);b.onclick=()=>{if(remove)chosen=chosen.filter(x=>x!==i);else chosen.push(i);draft();renderOrder();};parent.append(b);}
+$('check-order').onclick=()=>{if(chosen.length!==t.program.length){status(2,false,'Використайте всі рядки програми.');return;}const ok=chosen.every((x,i)=>x===i);assess(2,chosen.map(i=>t.program[i]).join('\n'),ok,'Перевірте: дані створюють до використання; тіло блоку розташовують після заголовка.');renderOrder();};
+$('download').onclick=()=>{if(!chosen.length){status(2,false,'Спочатку додайте рядки.');return;}const blob=new Blob([chosen.map(i=>t.program[i]).join('\n')+'\n'],{type:'text/x-python;charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=id+'.py';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);};
+$('reset-topic').onclick=()=>{if(confirm('Видалити відповіді та спроби лише цієї практики?')){delete P.data.topics[id];P.save();location.reload();}};
+const next=PYTHON_TOPICS[PYTHON_TOPICS.indexOf(t)+1];$('next-nav').innerHTML=`<a href="${t.section}.html">← До розділу</a>${next?`<a href="practice.html?topic=${next.id}">Наступна тема →</a>`:''}`;
+refresh();renderOrder();P.save();
+})();
