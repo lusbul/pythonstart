@@ -11,6 +11,18 @@ const legacy=scope==='all'?Object.values(P.data.legacy).map(x=>`<div class="repo
 $('report-area').innerHTML=`<h1>Інтерактивний Python · звіт</h1><p>Учасник / учасниця: ${E(P.data.name.trim()||'Не вказано')}</p><p>Обсяг: ${E(sel.selectedOptions[0].textContent)} · Дата: ${E(new Date().toLocaleString('uk-UA'))}</p><p><b>Виконано ${completed} із ${topics.length*3} завдань. Перевірених спроб: ${attempts}.</b></p><p>Це звіт про проходження тренажерів; кількість спроб не перетворюється на шкільну оцінку.</p><div class="table-wrap"><table class="report-table"><thead><tr><th>Тема</th><th>Виконано</th><th>Спроби</th></tr></thead><tbody>${table}</tbody></table></div>${details}${legacy?'<h2>Наявні квести · останні зафіксовані результати</h2>'+legacy:''}<h2>Моя рефлексія</h2><p style="white-space:pre-wrap">${E(P.data.reflection||'Не заповнено')}</p><p>Джерело: власні відповіді у навчальному сайті. Прогрес і повторні спроби зафіксовано локально у браузері.</p>`;
 }
 $('report-name').oninput=()=>{P.data.name=$('report-name').value;P.save();render();};$('reflection').oninput=()=>{P.data.reflection=$('reflection').value;P.save();render();};sel.onchange=render;
+$('download-pdf').onclick=async()=>{
+ render();const status=$('report-status'),button=$('download-pdf');
+ if(typeof html2pdf!=='function'){status.textContent='Не вдалося завантажити модуль PDF. Скористайтеся кнопкою «Друк / Зберегти як PDF».';return;}
+ button.disabled=true;status.textContent='Створюємо PDF. Зачекайте…';
+ const t=PYTHON_TOPICS.find(x=>x.id===sel.value);
+ const filename='Start_Python_'+(t?t.id:sel.value)+'_'+new Date().toISOString().slice(0,10)+'.pdf';
+ try{
+  const element=$('report-area');
+  await html2pdf().set({margin:[12,12,12,12],filename,image:{type:'jpeg',quality:.96},html2canvas:{scale:1.5,useCORS:true,backgroundColor:'#ffffff',windowWidth:900},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy'],avoid:['.report-entry','pre','tr']}}).from(element).save();
+  status.textContent='PDF підготовлено. Перевірте папку завантажень Вашого пристрою.';
+ }catch(error){status.textContent='Автоматичне збереження не вдалося. Скористайтеся кнопкою «Друк / Зберегти як PDF».';console.error(error)}finally{button.disabled=false}
+};
 $('print-report').onclick=()=>{render();P.printReport($('report-area').innerHTML);};
 $('save-json').onclick=()=>{const u=URL.createObjectURL(new Blob([JSON.stringify(P.data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download='pythonstart-progress.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);};render();
 })();
