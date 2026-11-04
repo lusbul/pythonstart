@@ -13,3 +13,8 @@ button,input,select,textarea{font:inherit}button.button{border:0;cursor:pointer}
 #practice-root header.section-hero {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(100px,190px)!important;align-items:center!important;gap:24px!important;}
 #practice-root header.section-hero .hero-lesson-image{display:block!important;position:static!important;width:100%!important;max-width:190px!important;height:155px!important;object-fit:contain!important;justify-self:end!important;}
 @media(max-width:600px){#practice-root header.section-hero{grid-template-columns:minmax(0,1fr) minmax(76px,115px)!important;gap:10px!important;}#practice-root header.section-hero .hero-lesson-image{height:105px!important;max-width:115px!important;}}
+
+/* Hero: large isolated robot artwork, no duplicate heading or caption */
+#practice-root header.section-hero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(230px,360px)!important;align-items:center!important;gap:12px!important;min-height:230px!important;overflow:hidden!important;padding:18px 24px!important}
+#practice-root header.section-hero .hero-lesson-image{display:block!important;width:100%!important;max-width:360px!important;height:220px!important;object-fit:contain!important;object-position:center!important;border:0!important;border-radius:0!important;background:transparent!important;justify-self:end!important}
+@media(max-width:700px){#practice-root header.section-hero{grid-template-columns:minmax(0,1fr) minmax(115px,36%)!important;min-height:155px!important;padding:14px!important;gap:5px!important}#practice-root header.section-hero .hero-lesson-image{height:160px!important;max-width:100%!important}#practice-root header.section-hero h1{font-size:clamp(1.35rem,5.2vw,2.2rem)!important}}
