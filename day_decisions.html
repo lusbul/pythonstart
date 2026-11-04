@@ -11,7 +11,7 @@
 <body><nav class="course-return" aria-label="Навігація курсу" style="display:flex;flex-wrap:wrap;gap:16px;padding:12px 20px;background:#ede8fc;color:#423286;margin:0"><a href="./conditions.html" style="color:#423286;font:600 14px system-ui;text-decoration:none">← До розділу</a><a href="./index.html" style="color:#423286;font:600 14px system-ui;text-decoration:none">🐍 Усі розділи</a></nav>
 <main>
 <header>
-<div><div class="tag">ІНТЕРАКТИВНИЙ PYTHON-КВЕСТ</div><h1>День<br><span>рішень.</span></h1><p class="intro">Дощ, загублений гаманець і підозріле повідомлення. Як діятимеш ти? Три ситуації — твоя власна історія.</p><div class="chips"><span>🌧️ Подбай про себе</span><span>👛 Допоможи іншим</span><span>🛡️ Захисти дані</span></div></div>
+<div><div class="tag">ІНТЕРАКТИВНИЙ PYTHON-КВЕСТ</div><h1>День<br><span>рішень.</span></h1><p class="intro">Дощ, загублений гаманець і підозріле повідомлення. Як діятимеш ти? Три ситуації — Ваша власна історія.</p><div class="chips"><span>🌧️ Подбай про себе</span><span>👛 Допоможи іншим</span><span>🛡️ Захисти дані</span></div></div>
 <svg class="art" viewBox="0 0 420 300" role="img" aria-label="Ілюстрація: стежки вибору між дощем, допомогою та цифровою безпекою">
 <circle cx="212" cy="147" r="128" fill="#263754"/><circle cx="212" cy="147" r="95" fill="none" stroke="#486085" stroke-dasharray="4 12"/>
 <path d="M210 268V176M210 176L104 86M210 176L320 85" stroke="#b7f398" stroke-width="16" stroke-linecap="round" fill="none"/>
@@ -23,8 +23,8 @@
 </header>
 <section class="game" aria-label="Ігрове вікно">
 <div class="bar"><h2>🎮 Твоя історія</h2><span class="status" id="status" role="status">Натисни «Почати гру»</span></div>
-<div id="output" role="log" aria-live="polite" aria-relevant="additions"><div class="line">👋 Вітаємо! Тут з’являтимуться події та наслідки твоїх рішень.</div></div>
-<div class="controls"><form id="form"><label id="prompt" for="reply" style="position:absolute;left:-10000px">Твоя відповідь</label><input id="reply" autocomplete="off" placeholder="Твоя відповідь…" disabled aria-label="Твоя відповідь"><button id="send" disabled>Відповісти ↵</button></form><div class="buttons"><button id="start" type="button">▶ Почати гру</button><button id="restart" class="secondary" type="button" disabled>↻ Зіграти ще раз</button></div><p class="hint">Вводь відповідь і натискай Enter. На перше завантаження гри потрібен час та інтернет.</p></div>
+<div id="output" role="log" aria-live="polite" aria-relevant="additions"><div class="line">👋 Вітаємо! Тут з’являтимуться події та наслідки Ваших рішень.</div></div>
+<div class="controls"><form id="form"><label id="prompt" for="reply" style="position:absolute;left:-10000px">Твоя відповідь</label><input id="reply" autocomplete="off" placeholder="Твоя відповідь…" disabled aria-label="Твоя відповідь"><button id="send" disabled>Відповісти ↵</button></form><div class="buttons"><button id="start" type="button">▶ Почати гру</button><button id="restart" class="secondary" type="button" disabled>↻ Зіграти ще раз</button></div><p class="hint">Вводь відповідь і натискайте Enter. На перше завантаження гри потрібен час та інтернет.</p></div>
 </section>
 <details><summary>🐍 Подивитися Python-код</summary><p class="hint">У грі є проста умова, повне й багатоваріантне розгалуження та вкладені умови.</p><pre><code id="code"></code></pre><button id="download" class="secondary" type="button">↓ Завантажити game.py</button></details>
 <footer>Кожен вибір — можливість навчитися 🌱</footer>
@@ -39,11 +39,11 @@ print("Попереду три життєві ситуації. Обирай с�
 print("\n🌧️ СИТУАЦІЯ 1. Час виходити до школи.")
 rain = input("Надворі дощ? (так/ні): ").strip().lower()
 while rain != "так" and rain != "ні":
-    rain = input("Введи так або ні: ").strip().lower()
+    rain = input("Введіть так або ні: ").strip().lower()
 if rain == "так":
     umbrella = input("Візьмеш парасольку? (так/ні): ").strip().lower()
     while umbrella != "так" and umbrella != "ні":
-        umbrella = input("Введи так або ні: ").strip().lower()
+        umbrella = input("Введіть так або ні: ").strip().lower()
     if umbrella == "так":
         print("☂️ Чудово! Ти дістанешся школи сухим.")
         points = points + 1
@@ -59,7 +59,7 @@ print("2 — Пройти повз.")
 print("3 — Забрати собі.")
 choice = input("Твій вибір (1/2/3): ").strip()
 while choice != "1" and choice != "2" and choice != "3":
-    choice = input("Обери 1, 2 або 3: ").strip()
+    choice = input("Оберіть 1, 2 або 3: ").strip()
 if choice == "1":
     print("🤝 Ти допоміг повернути загублену річ!")
     points = points + 2
@@ -69,28 +69,28 @@ else:
     print("🛑 Знайдена річ належить іншій людині.")
 
 print("\n📱 СИТУАЦІЯ 3. Тобі пише знайомий:")
-print("«Проголосуй за мене! Введи пароль від своєї пошти».")
+print("«Проголосуй за мене! Введіть пароль від своєї пошти».")
 answer = input("Введеш пароль? (так/ні): ").strip().lower()
 while answer != "так" and answer != "ні":
-    answer = input("Введи так або ні: ").strip().lower()
+    answer = input("Введіть так або ні: ").strip().lower()
 if answer == "так":
-    print("🚨 Стоп! Так можуть викрасти твій обліковий запис.")
+    print("🚨 Стоп! Так можуть викрасти Ваш обліковий запис.")
 else:
     print("🛡️ Твій пароль залишився в безпеці.")
     points = points + 1
 check = input("Зателефонуєш знайомому, щоб перевірити повідомлення? (так/ні): ").strip().lower()
 while check != "так" and check != "ні":
-    check = input("Введи так або ні: ").strip().lower()
+    check = input("Введіть так або ні: ").strip().lower()
 if check == "так":
     print("📞 Гарна ідея! Ти дізнаєшся, чи справді він це надіслав.")
     points = points + 1
 
 print("\n🏁 ДЕНЬ ЗАВЕРШИВСЯ!")
-print(name, "твій результат:", points, "із 5 балів.")
+print(name, "Ваш результат:", points, "із 5 балів.")
 if points == 5:
     print("🏆 Ти майстер продуманих рішень!")
 elif points >= 3:
-    print("🌟 Багато вдалих рішень! Спробуй інші варіанти.")
+    print("🌟 Багато вдалих рішень! Спробуйте інші варіанти.")
 else:
     print("🌱 Кожен вибір — можливість навчитися. Зіграємо ще раз?")
 </script>
@@ -113,7 +113,7 @@ function write(text, style = '') {
 }
 window.questInput = function(question) {
     write(question);
-    statusText.textContent = '✍️ Чекаємо на твою відповідь';
+    statusText.textContent = '✍️ Чекаємо на Вашу відповідь';
     reply.disabled = false;
     send.disabled = false;
     reply.value = '';
@@ -141,7 +141,7 @@ async function loadRuntime() {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js';
             script.onload = resolve;
-            script.onerror = () => {script.remove(); reject(new Error('Не вдалося завантажити Python. Перевір інтернет і спробуй ще раз.'));};
+            script.onerror = () => {script.remove(); reject(new Error('Не вдалося завантажити Python. Перевір інтернет і спробуйте ще раз.'));};
             document.head.appendChild(script);
         });
     }
@@ -186,7 +186,7 @@ await eval(_compiled, globals())
         document.dispatchEvent(new Event('change')); 
     } catch (error) {
         write('⚠️ ' + error.message, 'error');
-        statusText.textContent = 'Спробуй запустити гру ще раз';
+        statusText.textContent = 'Спробуйте запустити гру ще раз';
     } finally {
         running = false;
         reply.disabled = true;
