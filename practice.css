@@ -2,3 +2,9 @@ button,input,select,textarea{font:inherit}button.button{border:0;cursor:pointer}
 .modern{border-color:#bcb0ef;background:linear-gradient(145deg,#fff,#f8f6ff)}.py-editor{font-family:ui-monospace,Consolas,monospace!important;line-height:1.55;min-height:130px}.py-output{min-height:64px}.drop-zone{min-height:65px;border:2px dashed #b6a8e6;border-radius:14px;padding:10px}.modern .button{cursor:pointer}@media(max-width:600px){.work{padding:15px}.modern .actions>*{width:100%;text-align:center}}
 
 .lesson-illustration{display:block;width:min(100%,430px);height:auto;max-height:270px;object-fit:contain;margin:0 auto 1rem;border-radius:18px}.modern{border:1px solid #d9d0ff;border-radius:18px;background:#faf9ff}.modern h2{color:#49309d}.py-editor{width:100%;box-sizing:border-box;min-height:145px;font:15px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}.py-output{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c2234;color:#f0f7ff;padding:14px;border-radius:10px;min-height:50px}.drop-zone{min-height:65px;padding:10px;border:2px dashed #a9a0db;border-radius:12px}.modern .choice-line{max-width:100%;white-space:pre-wrap;text-align:left}@media(max-width:650px){.modern{padding:14px}.lesson-illustration{max-height:190px}}
+
+/* Ілюстрація розміщена поруч із назвою теми, без дублювання вмісту. */
+#practice-root .section-hero{display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:170px}
+#practice-root .section-hero>div{flex:1 1 0;min-width:0}
+#practice-root .hero-lesson-image{display:block;flex:0 0 auto;width:clamp(110px,19vw,190px);height:155px;object-fit:contain;object-position:center;border-radius:14px}
+@media(max-width:600px){#practice-root .section-hero{gap:10px;padding:16px;min-height:125px}#practice-root .hero-lesson-image{width:clamp(76px,25vw,120px);height:110px}#practice-root .section-hero h1{font-size:clamp(1.35rem,6vw,2rem)}}
