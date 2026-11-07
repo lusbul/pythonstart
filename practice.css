@@ -21,3 +21,39 @@ button,input,select,textarea{font:inherit}button.button{border:0;cursor:pointer}
 
 /* Один підсумковий PDF — після всіх завдань уроку */
 .lesson-final-report{background:linear-gradient(125deg,#f1eaff,#ffffff);border:2px solid #a99ae5;margin-top:28px}.lesson-final-report h2{color:#4a2c9a}.lesson-final-report .button{display:inline-block;text-decoration:none}.lesson-final-report .pdf-help{font-size:.88rem;color:#5e6079}#report-area{width:100%;box-sizing:border-box}#report-area section,#report-area .report-entry{break-inside:avoid-page}#report-area pre{white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* 2026-11-07 — compact lesson hero, shared by every practice topic */
+#practice-root header.section-hero.practice-hero{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(250px,35%)!important;
+ align-items:stretch!important;gap:22px!important;min-height:0!important;
+ padding:18px 24px!important;overflow:visible!important;
+}
+#practice-root .practice-hero-content{min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px}
+#practice-root .practice-back{display:inline-block;margin:0 0 6px;font-size:.92rem;color:#5143c7;text-decoration:underline;text-underline-offset:3px}
+#practice-root .practice-hero-content .tag{margin:0}
+#practice-root .practice-hero-content h1{margin:4px 0 0;line-height:1.12}
+#practice-root .practice-concept{margin:3px 0 7px}
+#practice-root .practice-student-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0}
+#practice-root .practice-student-row label{margin:0;font-size:.9rem}
+#practice-root .practice-student-row input{width:min(210px,100%);max-width:100%;padding:7px 9px}
+#practice-root .practice-hero-content #progress-label{margin:5px 0 0;font-size:.9rem}
+#practice-root header.section-hero.practice-hero .hero-lesson-image{
+ display:block!important;position:static!important;width:100%!important;
+ height:290px!important;max-width:none!important;object-fit:contain!important;
+ object-position:center!important;align-self:center!important;justify-self:center!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+}
+#practice-root>progress{display:block;margin:12px 0 16px;width:100%}
+@media(max-width:700px){
+ #practice-root header.section-hero.practice-hero{grid-template-columns:minmax(0,1fr) minmax(100px,36%)!important;gap:10px!important;padding:14px!important}
+ #practice-root header.section-hero.practice-hero .hero-lesson-image{height:clamp(145px,35vw,230px)!important;max-width:100%!important}
+ #practice-root .practice-hero-content h1{font-size:clamp(1.4rem,5vw,2.1rem)!important}
+ #practice-root .practice-concept{font-size:.9rem}
+ #practice-root .practice-student-row{display:block}
+ #practice-root .practice-student-row input{display:block;margin-top:4px;width:100%}
+}
+@media(max-width:390px){
+ #practice-root header.section-hero.practice-hero{grid-template-columns:minmax(0,1fr) 105px!important;gap:7px!important}
+ #practice-root header.section-hero.practice-hero .hero-lesson-image{height:155px!important}
+ #practice-root .practice-hero-content h1{font-size:1.32rem!important}
+}
