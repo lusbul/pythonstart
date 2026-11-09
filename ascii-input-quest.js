@@ -1,0 +1,28 @@
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id), storageKey='start-python-ascii-input-v1';
+const art={cat:[' /\\_/\\','( o.o )',' > ^ <'],robot:[' [o_o]',' /|_|\\','  / \\'],owl:[' ,_,','(o,o)','(   )','-"-"-']};
+let state={unlocked:0,done:false,name:'Буч',message:'Привіт! Нумо програмувати!',avatar:'cat'};
+try{const old=JSON.parse(localStorage.getItem(storageKey));if(old&&typeof old==='object'){state.unlocked=[0,1,2].includes(old.unlocked)?old.unlocked:0;state.done=old.done===true&&state.unlocked===2;for(const key of ['name','message'])if(typeof old[key]==='string')state[key]=old[key].slice(0,key==='name'?32:72);if(Object.hasOwn(art,old.avatar))state.avatar=old.avatar;}}catch{}
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(state));}catch{}}
+function progress(){document.querySelectorAll('[data-step]').forEach(b=>b.disabled=Number(b.dataset.step)>state.unlocked);const n=state.done?3:state.unlocked;const p=document.querySelector('.progress');p.setAttribute('aria-valuenow',n);p.firstElementChild.style.width=(n/3*100)+'%';}
+function step(n){document.querySelectorAll('[data-step]').forEach(b=>{if(Number(b.dataset.step)===n)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});for(let i=0;i<3;i++)$('step'+i).hidden=i!==n;}
+function feedback(id,text,ok){$(id).textContent=text;$(id).className='feedback '+(ok?'correct':'wrong');}
+document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>step(Number(b.dataset.step))));
+$('run-intro').addEventListener('click',()=>{const name=$('first-name').value;if(!name.trim()){feedback('intro-feedback',"Введіть відповідь для input(), щоб побачити її у змінній.",false);return;}$('intro-output').textContent='1. input() отримує: '+JSON.stringify(name)+'\n2. name зберігає текст: '+JSON.stringify(name)+'\n3. print() виводить:\nПривіт, '+name;feedback('intro-feedback','Змінна name містить текст - навіть якщо Ви ввели цифри.',true);state.unlocked=Math.max(1,state.unlocked);save();progress();$('next1').disabled=false;});
+$('next1').addEventListener('click',()=>step(1));
+const lines=['name = input("Ім\'я робота: ")','message = input("Його репліка: ")','print("[o_o]")','print("Я -", name)','print(message)'];
+let chosen=[];
+function blocks(){const bank=$('blocks'),list=$('assembled');bank.replaceChildren();list.replaceChildren();[2,4,0,3,1].forEach(i=>{const b=document.createElement('button');b.textContent=lines[i];b.disabled=chosen.includes(i);b.addEventListener('click',()=>{chosen.push(i);blocks();});bank.append(b);});chosen.forEach(i=>{const li=document.createElement('li'),code=document.createElement('code');code.textContent=lines[i];li.append(code);list.append(li);});$('undo').disabled=chosen.length===0;$('clear').disabled=chosen.length===0;$('builder-output').hidden=true;}
+$('undo').addEventListener('click',()=>{chosen.pop();blocks();});$('clear').addEventListener('click',()=>{chosen=[];blocks();$('builder-feedback').textContent='';});
+$('check').addEventListener('click',()=>{if(chosen.length!==5){feedback('builder-feedback','Використайте всі п’ять рядків. Почніть із двох запитань input().',false);return;}const valid=chosen.every((v,i)=>v===i);if(!valid){const badName=chosen.indexOf(3)<chosen.indexOf(0),badMessage=chosen.indexOf(4)<chosen.indexOf(1);feedback('builder-feedback',badName||badMessage?'Змінна використана раніше, ніж отримала значення. У Python це спричинить помилку.':'Звірте порядок із завданням: ім’я → репліка → малюнок → знайомство → репліка на екрані.',false);return;}feedback('builder-feedback','Правильно! Обидві змінні створено до використання. Якщо ввести Ро і Привіт!, результат буде таким:',true);$('builder-output').hidden=false;$('builder-output').textContent='[o_o]\nЯ - Ро\nПривіт!';state.unlocked=2;save();progress();$('next2').disabled=false;});
+$('next2').addEventListener('click',()=>step(2));
+function pythonCode(){return ['name = input("Ім\'я персонажа: ")','message = input("Його репліка: ")',...art[state.avatar].map(line=>'print('+JSON.stringify(line)+')'),'print("Я -", name)','print(message)'].join('\n')+'\n';}
+function render(){state.name=$('hero-name').value;state.message=$('hero-message').value;document.querySelectorAll('[data-avatar]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.avatar===state.avatar)));$('portrait').textContent=art[state.avatar].join('\n')+'\nЯ - '+state.name+'\n'+state.message;$('python-code').textContent=pythonCode();save();}
+document.querySelectorAll('[data-avatar]').forEach(b=>b.addEventListener('click',()=>{state.avatar=b.dataset.avatar;render();}));
+for(const id of ['hero-name','hero-message'])$(id).addEventListener('input',render);
+$('hero-name').value=state.name;$('hero-message').value=state.message;
+$('download-code').addEventListener('click',()=>{const blob=new Blob(['# ASCII-персонаж · Start Python\n'+pythonCode()],{type:'text/x-python;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='my_ascii_character.py';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);feedback('project-feedback','Файл .py підготовлено. Під час запуску програма знову запитає ім’я та репліку через input().',true);});
+$('finish').addEventListener('click',()=>{if(!state.name.trim()||!state.message.trim()){feedback('project-feedback','Заповніть ім’я та репліку персонажа.',false);return;}state.done=true;save();progress();$('completed').hidden=false;feedback('project-feedback','Ваш персонаж готовий!',true);});
+blocks();render();progress();$('next1').disabled=state.unlocked<1;$('next2').disabled=state.unlocked<2;$('completed').hidden=!state.done;step(state.unlocked);
+})();
